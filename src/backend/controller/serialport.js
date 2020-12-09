@@ -50,13 +50,21 @@ class SerialPortControllerClass extends BaseControllerClass {
                 }
 
                 if (data.isOpen) {
-                    this.port.open();
+                    this.port.open((err) => {
+                        if (err) {
+                            return resolve(this.toResponse(err.message));
+                        }
+                        resolve(this.toResponse('SUCCESS'));
+                    });
                 }
                 else {
-                    this.port.close();
+                    this.port.close((err) => {
+                        if (err) {
+                            return resolve(this.toResponse(err.message));
+                        }
+                        resolve(this.toResponse('SUCCESS'));
+                    });
                 }
-
-                resolve(this.toResponse('SUCCESS'));
             } catch (error) {
                 console.log(error);
                 resolve(this.toError(error));

@@ -105,6 +105,12 @@ export default {
                                 : `${this.selectedPort}串口已经关闭`,
                         });
                     }
+                    else {
+                        this.$message({
+                            type: 'error',
+                            message: response.data,
+                        });
+                    }
                 })
                 .catch((error) => {
                     console.error(error);
